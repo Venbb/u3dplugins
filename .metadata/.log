@@ -1,0 +1,13 @@
+!SESSION 2015-08-18 22:14:01.987 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=zh_CN
+Framework arguments:  -product com.android.ide.eclipse.adt.package.adtproduct -keyring /Users/Venbb/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product com.android.ide.eclipse.adt.package.adtproduct -keyring /Users/Venbb/.eclipse_keyring -showlocation
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2015-08-18 22:25:17.412
+!MESSAGE Failed to load properties file for project 'IAP_MM'
+
+!ENTRY org.eclipse.ui 2 2 2015-08-18 22:25:53.939
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
