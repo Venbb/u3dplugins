@@ -1,41 +1,57 @@
 package com.iap.mm;
 
-import android.content.Context;
+import mm.purchasesdk.OnPurchaseListener;
 import mm.purchasesdk.Purchase;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.util.Log;
+
+import com.unity3d.player.UnityPlayer;
 
 public class IAPController
 {
-	private final String TAG = "IAP_MM";
+	private static final String TAG = "IAP_MM";
 
 	public static Purchase purchase;
-	private Context context;
+	public static Context context;
 
-	private ProgressDialog mProgressDialog;
+	private static ProgressDialog mProgressDialog;
 	private IAPListener mListener;
 
 	// // 计费信息
 	// // 计费信息 (现网环境)
-	private static final String APPID = "000000000000"; // 请填写好正确的值
-	private static final String APPKEY = "0000000000000000";// 请填写好正确的值
+	private static final String APPID = "300009184004"; // 请填写好正确的值
+	private static final String APPKEY = "2F3CE83A8367CC82CF5F15D1A9269CEA";// 请填写好正确的值
 
 	// 计费点信息
 	private static final String LEASE_PAYCODE = "00000000000000";// 请填写好正确的值。运行时通过菜单可以修改
 
 	private static final int PRODUCT_NUM = 1;
 
-	private boolean isNextTrue = false;
-
 	private String mPaycode;
 	private int mProductNum = PRODUCT_NUM;
+	private static String ObjectName = "";
+	private static String CkFun = "";
 
-	public void init()
+	private static final IAPController instance = new IAPController();
+
+	public static IAPController getInstance()
 	{
-//		context = Demo.this;
+		return instance;
+	}
 
-		IAPHandler iapHandler = new IAPHandler(this);
+	public static Activity getActivity()
+	{
+		return UnityPlayer.currentActivity;
+	}
 
-		mPaycode = readPaycode();
-		mProductNum = readProductNUM();
+	public void init(Context _context)
+	{
+		context = _context;
+
+		IAPHandler iapHandler = new IAPHandler();
+		Log.d(TAG, "step1.实例化PurchaseListener。");
 		/**
 		 * IAP组件初始化.包括下面3步。
 		 */
@@ -43,11 +59,13 @@ public class IAPController
 		 * step1.实例化PurchaseListener。实例化传入的参数与您实现PurchaseListener接口的对象有关。
 		 * 例如，此Demo代码中使用IAPListener继承PurchaseListener，其构造函数需要Context实例。
 		 */
-		mListener = new IAPListener(this, iapHandler);
+		mListener = new IAPListener(context, iapHandler);
+		Log.d(TAG, "step2.获取Purchase实例。");
 		/**
 		 * step2.获取Purchase实例。
 		 */
 		purchase = Purchase.getInstance();
+		Log.d(TAG, "step3.向Purhase传入应用信息。APPID:" + APPID + ";APPKEY:" + APPKEY);
 		/**
 		 * step3.向Purhase传入应用信息。APPID，APPKEY。 需要传入参数APPID，APPKEY。 APPID，见开发者文档
 		 * APPKEY，见开发者文档
@@ -61,6 +79,7 @@ public class IAPController
 		{
 			e1.printStackTrace();
 		}
+		Log.d(TAG, "step4. IAP组件初始化开始");
 		/**
 		 * step4. IAP组件初始化开始， 参数PurchaseListener，初始化函数需传入step1时实例化的
 		 * PurchaseListener。
@@ -76,84 +95,29 @@ public class IAPController
 			return;
 		}
 	}
-	
-	@Override
-	public void onClick(View v)
+
+	public static void SetListener(String _objectName, String _ckFun)
 	{
-		int id = v.getId();
-		switch (id)
-		{
-		case R.id.billingNext:
-			try
-			{
-				purchase.order(context, mPaycode, 1, "test monthly",
-						isNextTrue, mListener);
-			}
-			catch (Exception e1)
-			{
-				//
-				e1.printStackTrace();
-				return;
-			}
-			break;
-		case R.id.billing:
-			/**
-			 * 商品购买接口。
-			 */
-			order(this, mListener);
-			break;
-		case R.id.query:
-			/**
-			 * 商品查询接口
-			 */
-			try
-			{
-				purchase.query(context, mPaycode, null, mListener);
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-				return;
-			}
-			showProgressDialog();
-			break;
-		case R.id.clean:
-			try
-			{
-				purchase.clearCache(this);
-			}
-			catch (Exception e1)
-			{
-				e1.printStackTrace();
-				return;
-			}
-			break;
-		case R.id.unsub:
-			try
-			{
-				purchase.unsubscribe(context, mPaycode, mListener);
-
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-				return;
-			}
-			showProgressDialog();
-			break;
-		default:
-			break;
-		}
-
+		Log.d(TAG, "SetListener  ObjectName:" + _objectName + ";CkFun:"
+				+ _ckFun);
+		ObjectName = _objectName;
+		CkFun = _ckFun;
 	}
 
-	public void order(Context context, OnPurchaseListener listener)
+	public void createOrder(String paycode, int paynum)
+	{
+		Log.d(TAG, "order. mPaycode:" + paycode);
+		Log.d(TAG, "order. mProductNum:" + paynum);
+		mPaycode = "30000918400401";// paycode;
+		mProductNum = 1;
+		order(context, mListener);
+	}
+
+	void order(Context context, OnPurchaseListener listener)
 	{
 		try
 		{
-			// purchase.order(context, mPaycode, mProductNum, listener);
-			purchase.order(context, mPaycode, readProductNUM(), "helloworl",
-					false, listener);
+			purchase.order(context, mPaycode, mProductNum, listener);
 		}
 		catch (Exception e)
 		{
@@ -161,11 +125,17 @@ public class IAPController
 		}
 	}
 
-	private void showProgressDialog()
+	public static void onBillingFinish(String result)
+	{
+		Log.d(TAG, "onBillingFinish:" + result);
+		UnityPlayer.UnitySendMessage(ObjectName, CkFun, result);
+	}
+
+	private static void showProgressDialog()
 	{
 		if (mProgressDialog == null)
 		{
-			mProgressDialog = new ProgressDialog(Demo.this);
+			mProgressDialog = new ProgressDialog(context);
 			mProgressDialog.setIndeterminate(true);
 			mProgressDialog.setMessage("请稍候.....");
 		}
@@ -175,193 +145,11 @@ public class IAPController
 		}
 	}
 
-	public void dismissProgressDialog()
+	public static void dismissProgressDialog()
 	{
 		if (mProgressDialog != null && mProgressDialog.isShowing())
 		{
 			mProgressDialog.dismiss();
 		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-
-		switch (item.getItemId())
-		{
-
-		case ITEM0:
-			LayoutInflater inflater = getLayoutInflater();
-			View layout = inflater.inflate(R.layout.dialog,
-					(ViewGroup) findViewById(R.id.dialog));
-			mPaycodeView = (EditText) layout.findViewById(R.id.paycode);
-			mPaycodeView.setText(readPaycode());
-			new AlertDialog.Builder(this).setTitle("商品ID").setView(layout)
-					.setPositiveButton("确定", mOkListener)
-					.setNegativeButton("取消", null).show();
-			break;
-		case ITEM1:
-			LayoutInflater inflater2 = getLayoutInflater();
-			View layout2 = inflater2.inflate(R.layout.dialognum,
-					(ViewGroup) findViewById(R.id.dialognum));
-			mProductNumView = (EditText) layout2.findViewById(R.id.num);
-			mProductNumView.setText("" + readProductNUM());
-			new AlertDialog.Builder(this).setTitle("订购数量").setView(layout2)
-					.setPositiveButton("确定", mNumClickListener)
-					.setNegativeButton("取消", null).show();
-			break;
-		case ITEM2:
-
-			isNextTrue = !isNextTrue;
-			Toast.makeText(context, "isNextCycle : " + isNextTrue,
-					Toast.LENGTH_SHORT).show();
-			;
-
-			break;
-		default:
-
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	private final static String PAYCODE = "Paycode";
-	private final static String PRODUCTNUM = "ProductNUM";
-
-	private void savePaycode(String paycode)
-	{
-		Editor sharedata = getSharedPreferences("data", 0).edit();
-		sharedata.putString(PAYCODE, paycode);
-		sharedata.commit();
-	}
-
-	private String readPaycode()
-	{
-		SharedPreferences sharedPreferences = getSharedPreferences("data", 0);
-		String paycode = sharedPreferences.getString(PAYCODE, LEASE_PAYCODE);
-		return paycode;
-	}
-
-	private void saveAppid(String paycode)
-	{
-		Editor sharedata = getSharedPreferences("data", 0).edit();
-		sharedata.putString("app_id", paycode);
-		sharedata.commit();
-	}
-
-	private String readPayid()
-	{
-		SharedPreferences sharedPreferences = getSharedPreferences("data", 0);
-		String paycode = sharedPreferences.getString("app_id", LEASE_PAYCODE);
-		return paycode;
-	}
-
-	private void saveProductNUM(int num)
-	{
-		Editor sharedata = getSharedPreferences("data", 0).edit();
-		sharedata.putInt(PRODUCTNUM, num);
-		sharedata.commit();
-	}
-
-	private int readProductNUM()
-	{
-		SharedPreferences sharedPreferences = getSharedPreferences("data", 0);
-		int num = sharedPreferences.getInt(PRODUCTNUM, PRODUCT_NUM);
-		return num;
-	}
-
-	private DialogInterface.OnClickListener mOkListener = new DialogInterface.OnClickListener()
-	{
-
-		@Override
-		public void onClick(DialogInterface dialog, int which)
-		{
-
-			if (mPaycodeView != null)
-			{
-				String paycode = mPaycodeView.getText().toString().trim();
-				savePaycode(paycode);
-				mPaycode = paycode;
-			}
-		}
-	};
-
-	private DialogInterface.OnClickListener mNumClickListener = new DialogInterface.OnClickListener()
-	{
-
-		@Override
-		public void onClick(DialogInterface dialog, int which)
-		{
-
-			if (mProductNumView != null)
-			{
-				String num = mProductNumView.getText().toString().trim();
-				Integer integer = new Integer(num);
-				System.out.println("num=" + num);
-				saveProductNUM(integer.intValue());
-				mProductNum = integer.intValue();
-				System.out.println("productNum=" + mProductNum);
-			}
-		}
-	};
-
-	private void initShow(String msg)
-	{
-		Toast.makeText(context, "初始化：" + msg, Toast.LENGTH_LONG).show();
-	}
-
-	@Override
-	protected void onResume()
-	{
-		// TODO Auto-generated method stub
-		super.onResume();
-		System.out.println("Demo1 resume");
-	}
-
-	@Override
-	protected void onRestart()
-	{
-		// TODO Auto-generated method stub
-		super.onRestart();
-		System.out.println("Demo1 onRestart");
-	}
-
-	@Override
-	protected void onPause()
-	{
-		// TODO Auto-generated method stub
-		super.onPause();
-		System.out.println("Demo1 onPause");
-	}
-
-	@Override
-	protected void onStop()
-	{
-		// TODO Auto-generated method stub
-		super.onStop();
-		System.out.println("Demo1 onStop");
-	}
-
-	@Override
-	protected void onDestroy()
-	{
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
-
-	public void showDialog(String title, String msg)
-	{
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle(title);
-		builder.setIcon(context.getResources().getDrawable(R.drawable.icon));
-		builder.setMessage((msg == null) ? "Undefined error" : msg);
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int whichButton)
-			{
-				dialog.dismiss();
-			}
-		});
-		builder.create().show();
 	}
 }

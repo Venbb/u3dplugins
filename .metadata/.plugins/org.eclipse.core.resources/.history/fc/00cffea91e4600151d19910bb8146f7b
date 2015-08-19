@@ -1,0 +1,135 @@
+package com.iap.mm;
+
+import mm.purchasesdk.OnPurchaseListener;
+import mm.purchasesdk.Purchase;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+
+import com.unity3d.player.UnityPlayer;
+
+public class IAPController
+{
+	private final String TAG = "IAP_MM";
+
+	public static Purchase purchase;
+	public static Context context;
+
+	private static ProgressDialog mProgressDialog;
+	private IAPListener mListener;
+
+	// // 计费信息
+	// // 计费信息 (现网环境)
+	private static final String APPID = "000000000000"; // 请填写好正确的值
+	private static final String APPKEY = "0000000000000000";// 请填写好正确的值
+
+	// 计费点信息
+	private static final String LEASE_PAYCODE = "00000000000000";// 请填写好正确的值。运行时通过菜单可以修改
+
+	private static final int PRODUCT_NUM = 1;
+
+	private boolean isNextTrue = false;
+
+	private String mPaycode;
+	private int mProductNum = PRODUCT_NUM;
+
+	private static final IAPController instance = new IAPController();
+
+	public static IAPController getInstance()
+	{
+		return instance;
+	}
+
+	public static Activity getActivity()
+	{
+		return UnityPlayer.currentActivity;
+	}
+
+	public void init(Context _context)
+	{
+		context = _context;
+
+		IAPHandler iapHandler = new IAPHandler();
+
+		/**
+		 * IAP组件初始化.包括下面3步。
+		 */
+		/**
+		 * step1.实例化PurchaseListener。实例化传入的参数与您实现PurchaseListener接口的对象有关。
+		 * 例如，此Demo代码中使用IAPListener继承PurchaseListener，其构造函数需要Context实例。
+		 */
+		mListener = new IAPListener(context, iapHandler);
+		/**
+		 * step2.获取Purchase实例。
+		 */
+		purchase = Purchase.getInstance();
+		/**
+		 * step3.向Purhase传入应用信息。APPID，APPKEY。 需要传入参数APPID，APPKEY。 APPID，见开发者文档
+		 * APPKEY，见开发者文档
+		 */
+		try
+		{
+			purchase.setAppInfo(APPID, APPKEY);
+
+		}
+		catch (Exception e1)
+		{
+			e1.printStackTrace();
+		}
+		/**
+		 * step4. IAP组件初始化开始， 参数PurchaseListener，初始化函数需传入step1时实例化的
+		 * PurchaseListener。
+		 */
+		try
+		{
+			purchase.init(context, mListener);
+
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return;
+		}
+	}
+
+	public void order(String paycode, int paynum)
+	{
+		mPaycode = paycode;
+		mProductNum = paynum;
+		order(context, mListener);
+	}
+
+	public void order(Context context, OnPurchaseListener listener)
+	{
+		try
+		{
+			purchase.order(context, mPaycode, mProductNum, listener);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private static void showProgressDialog()
+	{
+		if (mProgressDialog == null)
+		{
+			mProgressDialog = new ProgressDialog(context);
+			mProgressDialog.setIndeterminate(true);
+			mProgressDialog.setMessage("请稍候.....");
+		}
+		if (!mProgressDialog.isShowing())
+		{
+			mProgressDialog.show();
+		}
+	}
+
+	public void dismissProgressDialog()
+	{
+		if (mProgressDialog != null && mProgressDialog.isShowing())
+		{
+			mProgressDialog.dismiss();
+		}
+	}
+}
