@@ -23,6 +23,5 @@ public class UnityActivity extends UnityPlayerActivity
 	public void Order(String paycode, int paynum)
 	{
 		IAPController.getInstance().createOrder(paycode, paynum);
-
 	}
 }

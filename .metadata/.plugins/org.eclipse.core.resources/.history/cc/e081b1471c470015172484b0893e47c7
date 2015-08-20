@@ -5,6 +5,7 @@ import mm.purchasesdk.Purchase;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 import com.unity3d.player.UnityPlayer;
@@ -50,6 +51,10 @@ public class IAPController
 	{
 		context = _context;
 
+		new Handler(context.getMainLooper())
+		{
+			
+		};
 		IAPHandler iapHandler = new IAPHandler();
 		Log.d(TAG, "step1.实例化PurchaseListener。");
 		/**

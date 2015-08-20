@@ -5,6 +5,8 @@ import mm.purchasesdk.Purchase;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.unity3d.player.UnityPlayer;
@@ -50,50 +52,59 @@ public class IAPController
 	{
 		context = _context;
 
-		IAPHandler iapHandler = new IAPHandler();
-		Log.d(TAG, "step1.实例化PurchaseListener。");
-		/**
-		 * IAP组件初始化.包括下面3步。
-		 */
-		/**
-		 * step1.实例化PurchaseListener。实例化传入的参数与您实现PurchaseListener接口的对象有关。
-		 * 例如，此Demo代码中使用IAPListener继承PurchaseListener，其构造函数需要Context实例。
-		 */
-		mListener = new IAPListener(context, iapHandler);
-		Log.d(TAG, "step2.获取Purchase实例。");
-		/**
-		 * step2.获取Purchase实例。
-		 */
-		purchase = Purchase.getInstance();
-		Log.d(TAG, "step3.向Purhase传入应用信息。APPID:" + APPID + ";APPKEY:" + APPKEY);
-		/**
-		 * step3.向Purhase传入应用信息。APPID，APPKEY。 需要传入参数APPID，APPKEY。 APPID，见开发者文档
-		 * APPKEY，见开发者文档
-		 */
-		try
+		new Handler(context.getMainLooper())
 		{
-			purchase.setAppInfo(APPID, APPKEY);
+			@Override
+			public void handleMessage(Message msg)
+			{
+				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				IAPHandler iapHandler = new IAPHandler();
+				Log.d(TAG, "step1.实例化PurchaseListener。");
+				/**
+				 * IAP组件初始化.包括下面3步。
+				 */
+				/**
+				 * step1.实例化PurchaseListener。实例化传入的参数与您实现PurchaseListener接口的对象有关。
+				 * 例如，此Demo代码中使用IAPListener继承PurchaseListener，其构造函数需要Context实例。
+				 */
+				mListener = new IAPListener(context, iapHandler);
+				Log.d(TAG, "step2.获取Purchase实例。");
+				/**
+				 * step2.获取Purchase实例。
+				 */
+				purchase = Purchase.getInstance();
+				Log.d(TAG, "step3.向Purhase传入应用信息。APPID:" + APPID + ";APPKEY:" + APPKEY);
+				/**
+				 * step3.向Purhase传入应用信息。APPID，APPKEY。 需要传入参数APPID，APPKEY。 APPID，见开发者文档
+				 * APPKEY，见开发者文档
+				 */
+				try
+				{
+					purchase.setAppInfo(APPID, APPKEY);
 
-		}
-		catch (Exception e1)
-		{
-			e1.printStackTrace();
-		}
-		Log.d(TAG, "step4. IAP组件初始化开始");
-		/**
-		 * step4. IAP组件初始化开始， 参数PurchaseListener，初始化函数需传入step1时实例化的
-		 * PurchaseListener。
-		 */
-		try
-		{
-			purchase.init(context, mListener);
+				}
+				catch (Exception e1)
+				{
+					e1.printStackTrace();
+				}
+				Log.d(TAG, "step4. IAP组件初始化开始");
+				/**
+				 * step4. IAP组件初始化开始， 参数PurchaseListener，初始化函数需传入step1时实例化的
+				 * PurchaseListener。
+				 */
+				try
+				{
+					purchase.init(context, mListener);
 
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return;
-		}
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+					return;
+				}
+			}
+		};
 	}
 
 	public static void SetListener(String _objectName, String _ckFun)
