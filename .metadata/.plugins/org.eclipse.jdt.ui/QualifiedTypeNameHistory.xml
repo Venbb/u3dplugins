@@ -6,4 +6,7 @@
 <fullyQualifiedTypeName name="com.unity3d.player.UnityPlayer"/>
 <fullyQualifiedTypeName name="com.unity3d.player.UnityPlayerActivity"/>
 <fullyQualifiedTypeName name="com.iap.mm.IAPController"/>
+<fullyQualifiedTypeName name="android.os.Looper"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
+<fullyQualifiedTypeName name="android.os.Handler"/>
 </qualifiedTypeNameHistroy>
