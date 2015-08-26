@@ -1,0 +1,6 @@
+package com.vgame.plugins;
+
+public static class Context
+{
+
+}

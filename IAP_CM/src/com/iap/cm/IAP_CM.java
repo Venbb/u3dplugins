@@ -38,28 +38,19 @@ public class IAP_CM
 		return UnityPlayer.currentActivity;
 	}
 
-	public static void init(String appid, String appkey, String _objectName, String _ckFun)
+	public static void SetListener(String _objectName, String _ckFun)
+	{
+		ObjectName = _objectName;
+		CkFun = _ckFun;
+		Log.d(TAG, "init ObjectName:" + ObjectName + ";CkFun:" + CkFun);
+	}
+
+	public static void onInit(Context _context, String appid, String appkey)
 	{
 		APPID = appid;
 		APPKEY = appkey;
-		ObjectName = _objectName;
-		CkFun = _ckFun;
-		Log.d(TAG, "init  APPID:" + APPID + ";APPKEY:" + APPKEY + ";ObjectName:" + ObjectName + ";CkFun:" + CkFun);
-		if (isInit) return;
-		new Handler(Looper.getMainLooper()).post(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				onInit(getActivity());
-			}
-		});
-	}
-
-	public static void onInit(Context _context)
-	{
 		context = _context;
-
+		Log.d(TAG, "onInit APPID:" + APPID + ";APPKEY:" + APPKEY);
 		IAPHandler iapHandler = new IAPHandler();
 		Log.d(TAG, "step1.实例化PurchaseListener。");
 		/**
@@ -113,7 +104,11 @@ public class IAP_CM
 		Log.d(TAG, "createOrder. mProductNum:" + paynum);
 		mPaycode = paycode;
 		mProductNum = paynum;
-
+		if (!isInit)
+		{
+			Log.d(TAG, "init haven't finish !");
+			return;
+		}
 		new Handler(Looper.getMainLooper()).post(new Runnable()
 		{
 			@Override
@@ -141,6 +136,11 @@ public class IAP_CM
 	// 退订
 	public static void unsubscribe(String paycode)
 	{
+		if (!isInit)
+		{
+			Log.d(TAG, "init haven't finish !");
+			return;
+		}
 		try
 		{
 			purchase.unsubscribe(context, paycode, mListener);
@@ -157,6 +157,11 @@ public class IAP_CM
 	// 查询
 	public static void query(String paycode)
 	{
+		if (!isInit)
+		{
+			Log.d(TAG, "init haven't finish !");
+			return;
+		}
 		try
 		{
 			purchase.query(context, paycode, null, mListener);
@@ -172,6 +177,11 @@ public class IAP_CM
 	// 清除缓存
 	public static void clearCache()
 	{
+		if (!isInit)
+		{
+			Log.d(TAG, "init haven't finish !");
+			return;
+		}
 		try
 		{
 			purchase.clearCache(context);

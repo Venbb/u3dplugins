@@ -1,0 +1,6 @@
+package com.vgame.plugins;
+
+public class Context
+{
+ public const final String channel_iap_cm="";
+}
