@@ -52,7 +52,6 @@ public class IAPHandler extends Handler
 	// 购买返回结果
 	void onBillingFinish(String result)
 	{
-		IAP_CM.dismissProgressDialog();
 		IAP_CM.SendMessageToU3D(result);
 	}
 
