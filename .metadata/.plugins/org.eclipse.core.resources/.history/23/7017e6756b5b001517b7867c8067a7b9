@@ -1,6 +1,7 @@
 package com.iap.cm;
 
 import mm.purchasesdk.Purchase;
+import android.R.bool;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,10 +32,7 @@ public class CM_IAPController
 	static String ObjectName = "";
 	static String CkFun = "";
 
-	// 这里的返回类型必须是boolean别名，使用Boolean会导致Unity GetStatic<bool>获取不到。
-	// AndroidJavaException: java.lang.NoSuchFieldError: no static field with
-	// name='isInit' signature='Z' in class Lcom/iap/cm/CM_IAPController;
-	public static boolean isInit = false;
+	public static bool isInit = false;
 
 	static Activity getActivity()
 	{

@@ -31,9 +31,6 @@ public class CM_IAPController
 	static String ObjectName = "";
 	static String CkFun = "";
 
-	// 这里的返回类型必须是boolean别名，使用Boolean会导致Unity GetStatic<bool>获取不到。
-	// AndroidJavaException: java.lang.NoSuchFieldError: no static field with
-	// name='isInit' signature='Z' in class Lcom/iap/cm/CM_IAPController;
 	public static boolean isInit = false;
 
 	static Activity getActivity()
