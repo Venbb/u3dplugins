@@ -35,6 +35,7 @@ public class Egame_IAPController
 			@Override
 			public void run()
 			{
+				Log.d(TAG, "Init:" + getActivity());
 				EgamePay.init(getActivity());
 			}
 		});
@@ -53,6 +54,7 @@ public class Egame_IAPController
 			@Override
 			public void run()
 			{
+				Log.d(TAG, "Order:" + payParams);
 				Pay(payParams);
 			}
 		});
@@ -67,21 +69,21 @@ public class Egame_IAPController
 			@Override
 			public void paySuccess(Map<String, String> params)
 			{
-				String result = "{result:0,altas:" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS) + ",name:" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME) + "}";
+				String result = "{\"result\":0,\"altas\":\"" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS) + "\",\"name\":\"" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME) + "\",\"cp_order_id\":\"" + params.get(EgamePay.PAY_PARAMS_KEY_CP_PARAMS) + "\"}";
 				SendMessage(result);
 			}
 
 			@Override
 			public void payFailed(Map<String, String> params, int erroInt)
 			{
-				String result = "{result:1,altas:" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS) + ",name:" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME) + ",erroInt:" + erroInt + "}";
+				String result = "{\"result\":1,\"altas\":\"" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS) + "\",\"name\":\"" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME) + "\",\"erroInt\":" + erroInt + "}";
 				SendMessage(result);
 			}
 
 			@Override
 			public void payCancel(Map<String, String> params)
 			{
-				String result = "{result:2,altas:" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS) + ",name:" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME) + "}";
+				String result = "{\"result\":2,\"altas\":\"" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS) + "\",\"name\":\"" + params.get(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME) + "\"}";
 				SendMessage(result);
 			}
 		});
@@ -96,6 +98,7 @@ public class Egame_IAPController
 			@Override
 			public void run()
 			{
+				Log.d(TAG, "OnPause:" + getActivity());
 				EgameAgent.onPause(getActivity());
 			}
 		});
@@ -110,6 +113,7 @@ public class Egame_IAPController
 			@Override
 			public void run()
 			{
+				Log.d(TAG, "OnResume:" + getActivity());
 				EgameAgent.onResume(getActivity());
 			}
 		});
