@@ -35,11 +35,11 @@
 		<item value="false" key="jarOptionsWizardPage.STORE_USE_SRC_FOLDERS"/>
 		<item value="" key="jarOptionsWizardPage.DESCRIPTION_LOCATION"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/Users/niko/Documents/workspace/u3d/client/Assets/Plugins/Android/bin/egamepay.jar"/>
+			<item value="/Users/niko/Documents/workspace/u3d/mgame/Assets/Plugins/Android/bin/egamepay.jar"/>
 			<item value="/Users/niko/Documents/workspace/u3d/mgame/Assets/Plugins/Android/bin/main.jar"/>
 			<item value="/Users/niko/Documents/workspace/u3d/mgame/Assets/Plugins/Android/bin/iap_cm.jar"/>
 			<item value="/Users/niko/Documents/workspace/u3d/mgame/Assets/Plugins/Android/libs/iap_cm.jar"/>
-			<item value="/Users/niko/Documents/workspace/u3d/mgame/Assets/Plugins/Android/libs/plugin.jar"/>
-			<item value="/Users/niko/Documents/workspace/u3d/mgame/Assets/Plugins/Android/libs/iap_mm.jar"/>
 		</list>
 	</section>
 	<section name="BuildPathsPropertyPage">
