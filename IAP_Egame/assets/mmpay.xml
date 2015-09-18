@@ -3,9 +3,15 @@
 <!--Please don’t modify this XML data, any modify will make chinamobie in app payment not work-->
 <!--下述XML结构体不能修改，如修改则将影响计费逻辑-->
 <data>
+<<<<<<< HEAD
   <ProgramId>u4afFNqkQhk=</ProgramId>
   <APPID>ZfRlGpgrHyrI0jkX7SxMeA==</APPID>
   <AppName>LmUPIJAogRy9ygW7KGvVQA==</AppName>
+=======
+  <ProgramId>Ide0+byU5kU=</ProgramId>
+  <APPID>ZfRlGpgrHyrkiBSrX7O/8w==</APPID>
+  <AppName>2kY45yVEyYhcGIOwjmVq9zQGETlf9DlNIufhm1zHc5E=</AppName>
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
   <Provider>lr+MKQimItIQSpVaVq6R+w==</Provider>
   <ChannelCode>nzo7+D4xlJY=</ChannelCode>
   <Files>
@@ -13,6 +19,7 @@
   </Files>
   <Products>
     <ProductInfo>
+<<<<<<< HEAD
       <paycode>PKxrh1x8TTA=</paycode>
       <Items>
         <Item id="lfQ/oOCO06E=" name="UvqmI2+TWw4=" value="3lDAXNj2dYhmbLIud9L2qw=="/>
@@ -30,10 +37,16 @@
       <paycode>TFlsPeb76PA=</paycode>
       <Items>
         <Item id="lfQ/oOCO06E=" name="UvqmI2+TWw4=" value="3lDAXNj2dYjF+GEBeUfXxQ=="/>
+=======
+      <paycode>v21sNv8P6lI=</paycode>
+      <Items>
+        <Item id="lfQ/oOCO06E=" name="UvqmI2+TWw4=" value="BFkw7jK0O12tRJ6H2tT+7A=="/>
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
         <Item id="AlrwU6rcLXccFymdZySbRQ==" name="RVqxd07UBR0=" value="gMRmdVZbvEI="/>
       </Items>
     </ProductInfo>
     <ProductInfo>
+<<<<<<< HEAD
       <paycode>Xfe0AAhm3FM=</paycode>
       <Items>
         <Item id="lfQ/oOCO06E=" name="UvqmI2+TWw4=" value="3lDAXNj2dYhXM5YEh8zNEg=="/>
@@ -79,11 +92,24 @@
       <paycode>oSynCX6JxXA=</paycode>
       <Items>
         <Item id="lfQ/oOCO06E=" name="UvqmI2+TWw4=" value="QxSe5kujmx4cA64Nf7IElCe1qQTU9Og/"/>
+=======
+      <paycode>0try6ciDYQg=</paycode>
+      <Items>
+        <Item id="lfQ/oOCO06E=" name="UvqmI2+TWw4=" value="7p1QAqluCXGtRJ6H2tT+7A=="/>
+        <Item id="AlrwU6rcLXccFymdZySbRQ==" name="RVqxd07UBR0=" value="OvLmWl/G31c="/>
+      </Items>
+    </ProductInfo>
+    <ProductInfo>
+      <paycode>Pl9RStjda7o=</paycode>
+      <Items>
+        <Item id="lfQ/oOCO06E=" name="UvqmI2+TWw4=" value="3/Mb0oPZnYqtRJ6H2tT+7A=="/>
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
         <Item id="AlrwU6rcLXccFymdZySbRQ==" name="RVqxd07UBR0=" value="Eaw4wrFj3wo="/>
       </Items>
     </ProductInfo>
   </Products>
   <aliasName>
+<<<<<<< HEAD
     <alias name="hMN3y2DAvxc=" paycode="PKxrh1x8TTA="/>
     <alias name="hERkS9U+7dA=" paycode="Y+vJLi4NeGM="/>
     <alias name="vDUbs4igPm0=" paycode="TFlsPeb76PA="/>
@@ -96,6 +122,13 @@
     <alias name="ZPO2Zt8jkFg=" paycode="oSynCX6JxXA="/>
   </aliasName>
   <Mark>1A54E3DE2C2E05C4826DA7ED7141AF20</Mark>
+=======
+    <alias name="hMN3y2DAvxc=" paycode="v21sNv8P6lI="/>
+    <alias name="hERkS9U+7dA=" paycode="0try6ciDYQg="/>
+    <alias name="vDUbs4igPm0=" paycode="Pl9RStjda7o="/>
+  </aliasName>
+  <Mark>358795AA72984AB0A0A4793F5F8C9009</Mark>
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
   <!--上述XML结构体不能修改，如修改则将影响计费逻辑-->
   <!--Please don’t modify this XML data, any modify will make chinamobie in app payment not work-->
   <aliasChannel>

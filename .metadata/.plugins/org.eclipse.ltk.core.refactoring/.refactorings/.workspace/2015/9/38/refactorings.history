@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <session version="1.0">
+<<<<<<< HEAD
 <refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/IAP_CM" element2="/Unity" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1442567994739"/>
+=======
+<refactoring comment="Rename Java project &apos;Egame&apos; to &apos;IAP_Egame&apos;&#x0A;- Original element: &apos;Egame&apos;&#x0A;- Renamed element: &apos;Egame&apos;&#x0A;- Update references to refactored element" description="Rename Java project &apos;Egame&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=Egame" name="IAP_Egame" references="true" stamp="1442376678550" version="1.0"/>
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
 </session>

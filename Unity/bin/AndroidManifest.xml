@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher">
         <activity
-            android:name="com.vgame.plugins.UnityActivity">
+            android:name="com.unity.plugins.UnityActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

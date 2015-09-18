@@ -7,18 +7,27 @@
 <fullyQualifiedTypeName name="android.content.SharedPreferences"/>
 <fullyQualifiedTypeName name="java.security.acl.LastOwnerException"/>
 <fullyQualifiedTypeName name="com.iap.mm.IAPController"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="com.iap.cm.IAP_CM"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageManager"/>
 <fullyQualifiedTypeName name="android.content.pm.ApplicationInfo"/>
 <fullyQualifiedTypeName name="com.vgame.plugins.Context"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="com.iap.cm.CM_IAPController"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="cn.egame.terminal.paysdk.EgamePayListener"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
 <fullyQualifiedTypeName name="android.os.Looper"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="com.iap.cm.CM_IAPController"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.unity3d.player.UnityPlayer"/>
 <fullyQualifiedTypeName name="cn.egame.terminal.paysdk.EgamePay"/>
+=======
+<fullyQualifiedTypeName name="cn.egame.terminal.paysdk.EgamePay"/>
+<fullyQualifiedTypeName name="cn.egame.terminal.sdk.log.EgameAgent"/>
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
 </qualifiedTypeNameHistroy>

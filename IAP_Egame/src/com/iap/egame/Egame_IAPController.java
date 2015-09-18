@@ -35,9 +35,14 @@ public class Egame_IAPController
 			@Override
 			public void run()
 			{
+<<<<<<< HEAD
 				Log.d(TAG, "EgamePay.sInitStatus0:" + EgamePay.sInitStatus);
 				EgamePay.init(getActivity());
 				Log.d(TAG, "EgamePay.sInitStatus1:" + EgamePay.sInitStatus);
+=======
+				Log.d(TAG, "Init:" + getActivity());
+				EgamePay.init(getActivity());
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
 			}
 		});
 	}
@@ -45,7 +50,10 @@ public class Egame_IAPController
 	// 支付
 	public static void Order(String altas, String name)
 	{
+<<<<<<< HEAD
 		Log.d(TAG, "EgamePay.sInitStatus1:" + EgamePay.sInitStatus);
+=======
+>>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
 		final HashMap<String, String> payParams = new HashMap<String, String>();
 		payParams.put(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS, altas);
 		payParams.put(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME, name);

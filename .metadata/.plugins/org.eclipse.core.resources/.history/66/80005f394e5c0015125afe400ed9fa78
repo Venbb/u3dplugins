@@ -1,4 +1,4 @@
-package com.vgame.plugins;
+package cn.s7k7k.sheep;
 
 import android.os.Bundle;
 

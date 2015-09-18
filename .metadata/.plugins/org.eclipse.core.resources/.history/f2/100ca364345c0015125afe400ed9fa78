@@ -1,0 +1,74 @@
+package com.iap.egame;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
+import cn.egame.terminal.paysdk.EgamePay;
+import cn.egame.terminal.paysdk.EgamePayListener;
+
+import com.unity3d.player.UnityPlayer;
+
+public class Egame_IAPController
+{
+	static Activity getActivity()
+	{
+		return UnityPlayer.currentActivity;
+	}
+
+	// 初始化
+	public static void Init()
+	{
+		EgamePay.init(getActivity());
+	}
+
+	public static void Order(String altas, String name)
+	{
+		final HashMap<String, String> payParams = new HashMap<String, String>();
+		payParams.put(EgamePay.PAY_PARAMS_KEY_TOOLS_ALIAS, altas);
+		payParams.put(EgamePay.PAY_PARAMS_KEY_TOOLS_NAME, name);
+		
+		Handler handler =new Handler(Looper.getMainLooper());
+		handler.post(new Runnable()
+		{
+			
+			@Override
+			public void run()
+			{
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+
+	// 支付
+	private static void Pay(HashMap<String, String> payParams)
+	{
+		EgamePay.pay(getActivity(), payParams, new EgamePayListener()
+		{
+
+			@Override
+			public void paySuccess(Map<String, String> arg0)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void payFailed(Map<String, String> arg0, int arg1)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void payCancel(Map<String, String> arg0)
+			{
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+}
