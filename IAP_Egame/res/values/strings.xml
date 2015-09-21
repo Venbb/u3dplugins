@@ -1,9 +1,3 @@
 <resources>
-
-<<<<<<< HEAD
-    <string name="app_name">IAP_Egame</string>
-=======
     <string name="app_name">Egame</string>
->>>>>>> 3bc53d857d162e63de821655a56d6dde95296617
-
 </resources>

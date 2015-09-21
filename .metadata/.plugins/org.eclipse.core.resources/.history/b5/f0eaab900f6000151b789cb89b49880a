@@ -25,20 +25,9 @@ public class Egame_IAPController
 		return UnityPlayer.currentActivity;
 	}
 
-	static boolean isInit = false;
-
 	public static boolean IsInit()
 	{
-		Handler handler = new Handler(Looper.getMainLooper());
-		handler.post(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				isInit = EgamePay.sInitStatus < 0 ? false : true;
-			}
-		});
-		return isInit;
+		return EgamePay.sInitStatus < 0 ? false : true;
 	}
 
 	// 初始化

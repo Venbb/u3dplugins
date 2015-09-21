@@ -24,9 +24,7 @@ public class Egame_IAPController
 	{
 		return UnityPlayer.currentActivity;
 	}
-
 	static boolean isInit = false;
-
 	public static boolean IsInit()
 	{
 		Handler handler = new Handler(Looper.getMainLooper());
