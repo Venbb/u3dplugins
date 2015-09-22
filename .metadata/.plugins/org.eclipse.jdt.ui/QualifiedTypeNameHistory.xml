@@ -2,4 +2,10 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="cn.egame.terminal.sdk.log.EgameAgent"/>
 <fullyQualifiedTypeName name="cn.egame.terminal.paysdk.EgamePay"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.os.Environment"/>
+<fullyQualifiedTypeName name="com.unity3d.player.UnityPlayerActivity"/>
+<fullyQualifiedTypeName name="com.unity3d.player.UnityPlayer"/>
+<fullyQualifiedTypeName name="android.os.StatFs"/>
 </qualifiedTypeNameHistroy>
