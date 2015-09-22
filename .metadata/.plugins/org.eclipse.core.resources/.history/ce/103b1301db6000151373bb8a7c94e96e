@@ -1,0 +1,9 @@
+package com.unity.plugins;
+
+public class PathEx
+{
+ static public final boolean HasSDCard()
+ {
+	 
+ }
+}

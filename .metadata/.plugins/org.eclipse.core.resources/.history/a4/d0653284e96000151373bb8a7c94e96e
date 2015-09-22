@@ -1,0 +1,20 @@
+package com.unity.plugins;
+
+import android.os.Environment;
+
+public class PathEx
+{
+	static public final boolean HasSDCard()
+	{
+		Environment.isExternalStorageRemovable();
+	}
+	// 设备的外存是否是用内存模拟的，是则返回true。(API Level 11)
+	// public static final boolean IsExternalStorageEmulated()
+	// {
+	// return Environment.isExternalStorageEmulated();
+	// }
+	public static final boolean IsExternalStorageRemovable()
+	{
+		
+	}
+}
