@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="isInit" key="selection"/>
+		<item value="WXMediaMessage" key="selection"/>
 		<list key="findhistory">
+			<item value="WXMediaMessage"/>
+			<item value="getExternalFilesDir"/>
 			<item value="isInit"/>
 			<item value="chanel_iap_cm"/>
 			<item value="savePaycode"/>
 			<item value="LEASE_PAYCODE"/>
 			<item value="mPaycode"/>
 			<item value="mPaycodeView"/>
-			<item value="mProgressDialog"/>
-			<item value="ITEM0"/>
 		</list>
 		<list key="replacehistory">
 		</list>

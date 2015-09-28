@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.unity.plugins.wxapi.WXAPIHandler&apos; to &apos;WXEntryActivity&apos;&#x0A;- Original project: &apos;WXAPI&apos;&#x0A;- Original element: &apos;com.unity.plugins.wxapi.WXAPIHandler&apos;&#x0A;- Renamed element: &apos;com.unity.plugins.wxapi.WXEntryActivity&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;WXAPIHandler&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.unity.plugins.wxapi{WXAPIHandler.java[WXAPIHandler" matchStrategy="1" name="WXEntryActivity" qualified="false" references="true" similarDeclarations="false" stamp="1443434495808" textual="false" version="1.0"/>
+</session>

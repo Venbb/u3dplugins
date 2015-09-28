@@ -1,0 +1,82 @@
+package com.unity.plugins.wxapi;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+
+import com.tencent.mm.sdk.openapi.BaseReq;
+import com.tencent.mm.sdk.openapi.BaseResp;
+import com.tencent.mm.sdk.openapi.ConstantsAPI;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.SendAuth;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+public class WXEntryActivity extends Activity implements IWXAPIEventHandler
+{
+	static final String TAG = "WXAPIHandler";
+	private IWXAPI api;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+		if (api.handleIntent(getIntent(), this))
+		{
+			Log.d(TAG, "onReceive.........handleIntent ");
+		}
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent)
+	{
+		super.onNewIntent(intent);
+
+		setIntent(intent);
+		api.handleIntent(intent, this);
+	}
+
+	@Override
+	public void onReq(BaseReq req)
+	{
+		switch (req.getType())
+		{
+			case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+				break;
+			case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+				break;
+			default:
+				break;
+		}
+	}
+
+	@Override
+	public void onResp(BaseResp resp)
+	{
+		switch (resp.errCode)
+		{
+			case BaseResp.ErrCode.ERR_OK:// 0(用户同意)
+				if (resp instanceof SendAuth.Resp)
+				{
+					if (resp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX)
+					{
+						WXAPIController.SendMessage(((SendAuth.Resp) resp).token, "Weixincallback_shareSuccess");
+					}
+					else if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH)
+					{
+						WXAPIController.SendMessage(((SendAuth.Resp) resp).token, "Weixincallback_LoginSuccess");
+					}
+				}
+				break;
+			case BaseResp.ErrCode.ERR_USER_CANCEL:// -2（用户取消）
+				break;
+			case BaseResp.ErrCode.ERR_AUTH_DENIED:// -4（用户拒绝授权）
+				break;
+			default:
+				break;
+		}
+		Log.d(TAG, "onResp = " + resp.errStr);
+	}
+}

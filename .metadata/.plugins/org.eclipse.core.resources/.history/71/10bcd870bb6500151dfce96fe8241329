@@ -1,0 +1,6 @@
+package com.unity.plugins.wxapi;
+
+public class Constants
+{
+	public static String APP_ID = "wx77125009d79d3b29";
+}

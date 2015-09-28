@@ -1,0 +1,72 @@
+package com.unity.plugins.wxapi;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import com.tencent.mm.sdk.openapi.BaseReq;
+import com.tencent.mm.sdk.openapi.BaseResp;
+import com.tencent.mm.sdk.openapi.ConstantsAPI;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.SendAuth;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+public class WXAPIHandler extends BroadcastReceiver implements IWXAPIEventHandler
+{
+	static final String TAG = "WXAPIHandler";
+	private IWXAPI api;
+
+	@Override
+	public void onReceive(Context context, Intent data)
+	{
+		api = WXAPIFactory.createWXAPI(context, Constants.APP_ID);
+		if (api.handleIntent(data, this))
+		{
+			Log.d(TAG, "onReceive.........handleIntent ");
+		}
+	}
+
+	@Override
+	public void onReq(BaseReq req)
+	{
+		switch (req.getType())
+		{
+			case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+				break;
+			case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+				break;
+			default:
+				break;
+		}
+	}
+
+	@Override
+	public void onResp(BaseResp resp)
+	{
+		switch (resp.errCode)
+		{
+			case BaseResp.ErrCode.ERR_OK:// 0(用户同意)
+				if (resp instanceof SendAuth.Resp)
+				{
+					if (resp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX)
+					{
+						WXAPIController.SendMessage(((SendAuth.Resp) resp).token, "Share");
+					}
+					else if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH)
+					{
+
+					}
+				}
+				break;
+			case BaseResp.ErrCode.ERR_USER_CANCEL:// -2（用户取消）
+				break;
+			case BaseResp.ErrCode.ERR_AUTH_DENIED:// -4（用户拒绝授权）
+				break;
+			default:
+				break;
+		}
+		Log.d(TAG, "onResp = " + resp.errStr);
+	}
+}

@@ -1,8 +1,11 @@
 package com.unity.plugins;
 
+import java.io.File;
+
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.Log;
 
 import com.unity3d.player.UnityPlayer;
 //<!-- 在SDCard中创建与删除文件权限 -->
@@ -12,6 +15,8 @@ import com.unity3d.player.UnityPlayer;
 
 public class PathEx
 {
+	private static final String TAG = "PathEx";
+
 	// 设备外存是否存在并且可读写
 	static public final boolean hasSDCard()
 	{
@@ -105,7 +110,10 @@ public class PathEx
 	public static final String getApplicationExternalFilesDir(Context context, String type)
 	{
 		// 可以获取到 SDCard/Android/data/你的应用的包名/files/ 目录，一般放一些长时间保存的数据
-		return context.getExternalFilesDir(type).getPath();
+		File file = context.getExternalFilesDir(type);
+		Log.d(TAG, "getApplicationExternalFilesDir:" + file);
+		if (file != null) { return file.getPath(); }
+		return "";
 	}
 
 	// 应用在外部存储上的缓存目录

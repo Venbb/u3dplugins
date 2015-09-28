@@ -1,0 +1,183 @@
+package com.unity.plugins.wxapi;
+
+import java.io.File;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendAuth;
+import com.tencent.mm.sdk.openapi.SendMessageToWX;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXImageObject;
+import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.platformtools.Util;
+import com.unity3d.player.UnityPlayer;
+
+public class WXAPIController
+{
+	static final String TAG = "WXAPIController";
+	static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
+	static IWXAPI api;
+	static String ObjectName = "";
+	static String CkFun = "";
+
+	public static void regToWx(String appid, String _objectName, String _ckFun)
+	{
+		Constants.APP_ID = appid;
+		SetListener(_objectName, _ckFun);
+		Handler handler = new Handler(Looper.getMainLooper());
+		handler.post(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				api = WXAPIFactory.createWXAPI(UnityPlayer.currentActivity, Constants.APP_ID, true);
+				api.registerApp(Constants.APP_ID);
+			}
+		});
+	}
+
+	static boolean isWXAppInstalled = false;
+
+	public static boolean isWXAppInstalled()
+	{
+		isWXAppInstalled = false;
+		Handler handler = new Handler(Looper.getMainLooper());
+		handler.post(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				isWXAppInstalled = api.isWXAppInstalled();
+				Log.d(TAG, "isWXAppInstalled = " + isWXAppInstalled);
+			}
+		});
+		return isWXAppInstalled;
+	}
+
+	static boolean isWXAppSupportAPI = false;
+
+	public static boolean isWXAppSupportAPI()
+	{
+		isWXAppSupportAPI = false;
+		Handler handler = new Handler(Looper.getMainLooper());
+		handler.post(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				isWXAppSupportAPI = api.isWXAppSupportAPI();
+				Log.d(TAG, "isWXAppSupportAPI = " + isWXAppSupportAPI);
+			}
+		});
+		return isWXAppSupportAPI;
+	}
+
+	static int wxSdkVersion = 0;
+
+	public static int getWXAppSupportAPI()
+	{
+		Handler handler = new Handler(Looper.getMainLooper());
+		handler.post(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				wxSdkVersion = api.getWXAppSupportAPI();
+				if (wxSdkVersion >= TIMELINE_SUPPORTED_VERSION)
+				{
+					// 支持发送到朋友圈
+					Log.d(TAG, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline supported");
+				}
+				else
+				{
+					Log.d(TAG, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline not supported");
+				}
+			}
+		});
+		return wxSdkVersion;
+	}
+
+	static boolean launch_wx_succ = false;
+
+	public static boolean launch_wx()
+	{
+		launch_wx_succ = false;
+		Handler handler = new Handler(Looper.getMainLooper());
+		handler.post(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				launch_wx_succ = api.openWXApp();
+				Log.d(TAG, "launch result = " + launch_wx_succ);
+			}
+		});
+		return launch_wx_succ;
+	}
+
+	public static void login()
+	{
+		Handler handler = new Handler(Looper.getMainLooper());
+		handler.post(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				final SendAuth.Req req = new SendAuth.Req();
+				req.scope = "snsapi_userinfo";
+				req.state = "wechat_login_req";
+				api.sendReq(req);
+
+				Log.d(TAG, "wechat_login_req........");
+			}
+		});
+	}
+
+	public static void Share(String imgPath)
+	{
+		File file = new File(imgPath);
+		if (!file.exists())
+		{
+			Log.d(TAG, "未能找到图标：" + imgPath);
+		}
+
+		WXImageObject imgObj = new WXImageObject();
+		imgObj.setImagePath(path);
+
+		WXMediaMessage msg = new WXMediaMessage();
+		msg.mediaObject = imgObj;
+
+		Bitmap bmp = BitmapFactory.decodeFile(path);
+		Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
+		bmp.recycle();
+		msg.thumbData = Util.bmpToByteArray(thumbBmp, true);
+
+		SendMessageToWX.Req req = new SendMessageToWX.Req();
+		req.transaction = buildTransaction("img");
+		req.message = msg;
+		req.scene = isTimelineCb.isChecked() ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
+		api.sendReq(req);
+	}
+
+	public static void SetListener(String _objectName, String _ckFun)
+	{
+		ObjectName = _objectName;
+		CkFun = _ckFun;
+		Log.d(TAG, "SetListener ObjectName:" + ObjectName + ";CkFun:" + CkFun);
+	}
+
+	// 发送消息给Unity
+	public static void SendMessage(String dataStr)
+	{
+		Log.d(TAG, "SendMessage:" + dataStr);
+		if (!ObjectName.isEmpty() && !CkFun.isEmpty())
+		{
+			UnityPlayer.UnitySendMessage(ObjectName, CkFun, dataStr);
+		}
+	}
+}
