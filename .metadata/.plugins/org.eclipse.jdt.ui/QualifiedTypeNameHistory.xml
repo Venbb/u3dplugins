@@ -10,7 +10,6 @@
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="com.tencent.mm.sdk.openapi.IWXAPI"/>
 <fullyQualifiedTypeName name="com.tencent.mm.sdk.openapi.WXAPIFactory"/>
-<fullyQualifiedTypeName name="com.unity3d.player.UnityPlayer"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
 <fullyQualifiedTypeName name="android.os.Looper"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
@@ -21,5 +20,7 @@
 <fullyQualifiedTypeName name="com.unity.plugins.wxapi.WXAPIController"/>
 <fullyQualifiedTypeName name="com.unity.plugins.wxapi.Constants"/>
 <fullyQualifiedTypeName name="com.tencent.mm.sdk.openapi.ConstantsAPI"/>
+<fullyQualifiedTypeName name="com.unity3d.player.UnityPlayer"/>
+<fullyQualifiedTypeName name="android.content.BroadcastReceiver"/>
 <fullyQualifiedTypeName name="android.app.Activity"/>
 </qualifiedTypeNameHistroy>

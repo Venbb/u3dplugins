@@ -1,1 +1,4 @@
 1443434495808	Rename type 'WXAPIHandler'
+1443492056953	Rename type 'WXEntryActivity'
+1443494831935	Rename package 'com.unity.plugins.wxapi'
+1443494919067	Move compilation unit
