@@ -1,0 +1,60 @@
+package com.unity.plugins;
+
+import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
+import android.content.Context;
+import android.text.format.Formatter;
+import android.util.Log;
+
+import com.unity3d.player.UnityPlayer;
+
+public class MemEx
+{
+	private static final String TAG = "MemEx";
+
+	public static void log()
+	{
+		Log.d(TAG, "getAvailMem = " + getAvailMem());
+	}
+
+	// 系统可用内存
+	public static float getAvailMem()
+	{
+		MemoryInfo mi = new MemoryInfo();
+		ActivityManager am = (ActivityManager) UnityPlayer.currentActivity.getSystemService(Context.ACTIVITY_SERVICE);
+		am.getMemoryInfo(mi);
+		long memSize = mi.availMem;
+		float size = memSize / 1024 / 1024;
+		Log.d(TAG, "getAvailMem = " + formateFileSize(memSize) + ";lowMemory = " + mi.lowMemory + ";threshold = " + formateFileSize(mi.threshold) + ";threshold long = " + mi.threshold);
+		// // 获得系统里正在运行的所有进程
+		// List<RunningAppProcessInfo> runningAppProcessesList =
+		// am.getRunningAppProcesses();
+		//
+		// for (RunningAppProcessInfo runningAppProcessInfo :
+		// runningAppProcessesList)
+		// {
+		// // 进程ID号
+		// int pid = runningAppProcessInfo.pid;
+		// // 用户ID
+		// int uid = runningAppProcessInfo.uid;
+		// // 进程名
+		// String processName = runningAppProcessInfo.processName;
+		// // 占用的内存
+		// int[] pids = new int[]
+		// { pid };
+		//
+		// Debug.MemoryInfo[] memoryInfo = am.getProcessMemoryInfo(pids);
+		// int memorySize = memoryInfo[0].dalvikPrivateDirty;
+		//
+		// Log.d(TAG, "processName=" + processName + ",pid=" + pid + ",uid=" +
+		// uid + ",memorySize=" + memorySize / 1024 + "m");
+		// }
+		return size;
+	}
+
+	// 调用系统函数，字符串转换 long -String KB/MB
+	private static String formateFileSize(long size)
+	{
+		return Formatter.formatFileSize(UnityPlayer.currentActivity, size);
+	}
+}

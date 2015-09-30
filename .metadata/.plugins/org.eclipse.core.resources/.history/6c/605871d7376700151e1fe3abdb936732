@@ -1,0 +1,61 @@
+package com.unity.plugins;
+
+import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
+import android.content.Context;
+import android.os.Bundle;
+import android.text.format.Formatter;
+import android.util.Log;
+
+import com.unity3d.player.UnityPlayerActivity;
+
+public class MainActivity extends UnityPlayerActivity
+{
+	private static final String TAG = "MainActivity";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+	}
+
+	// 可用内存
+	public int getAvailMem()
+	{
+		MemoryInfo mi = new MemoryInfo();
+		ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+		am.getMemoryInfo(mi);
+		long memSize = mi.availMem;
+		int size = ((int) memSize) / 1024 / 1024;
+	}
+
+	// 最大内存
+	public int getMaxMemory()
+	{
+		int maxMemory = ((int) Runtime.getRuntime().maxMemory()) / 1024 / 1024;
+		Log.d(TAG, "getMaxMemory = " + maxMemory);
+		return maxMemory;
+	}
+
+	// 占用内存
+	public int getTotalMemory()
+	{
+		int totalMemory = ((int) Runtime.getRuntime().totalMemory()) / 1024 / 1024;
+		Log.d(TAG, "getTotalMemory = " + totalMemory);
+		return totalMemory;
+	}
+
+	// 剩余内存
+	public int getFreeMemory()
+	{
+		int freeMemory = ((int) Runtime.getRuntime().freeMemory()) / 1024 / 1024;
+		Log.d(TAG, "getFreeMemory = " + freeMemory);
+		return freeMemory;
+	}
+
+	// 调用系统函数，字符串转换 long -String KB/MB
+	private String formateFileSize(long size)
+	{
+		return Formatter.formatFileSize(MainActivity.this, size);
+	}
+}

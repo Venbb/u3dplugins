@@ -1,6 +1,11 @@
-package cn.s7k7k.sheep;
+package com.unity.plugins;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.format.Formatter;
+import android.util.Log;
 
 import com.unity3d.player.UnityPlayerActivity;
 
@@ -12,5 +17,7 @@ public class MainActivity extends UnityPlayerActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+	
 	}
+
 }

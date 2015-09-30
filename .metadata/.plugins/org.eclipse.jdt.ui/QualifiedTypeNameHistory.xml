@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="cn.egame.terminal.sdk.log.EgameAgent"/>
 <fullyQualifiedTypeName name="cn.egame.terminal.paysdk.EgamePay"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.os.Environment"/>
 <fullyQualifiedTypeName name="com.unity3d.player.UnityPlayerActivity"/>
 <fullyQualifiedTypeName name="android.os.StatFs"/>
@@ -20,7 +19,16 @@
 <fullyQualifiedTypeName name="com.unity.plugins.wxapi.WXAPIController"/>
 <fullyQualifiedTypeName name="com.unity.plugins.wxapi.Constants"/>
 <fullyQualifiedTypeName name="com.tencent.mm.sdk.openapi.ConstantsAPI"/>
-<fullyQualifiedTypeName name="com.unity3d.player.UnityPlayer"/>
 <fullyQualifiedTypeName name="android.content.BroadcastReceiver"/>
 <fullyQualifiedTypeName name="android.app.Activity"/>
+<fullyQualifiedTypeName name="java.lang.Runtime"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.app.ActivityManager"/>
+<fullyQualifiedTypeName name="android.app.ActivityManager.MemoryInfo"/>
+<fullyQualifiedTypeName name="android.text.format.Formatter"/>
+<fullyQualifiedTypeName name="com.unity3d.player.UnityPlayer"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="android.app.ActivityManager.RunningAppProcessInfo"/>
+<fullyQualifiedTypeName name="android.os.Debug"/>
+<fullyQualifiedTypeName name="android.os.Debug.MemoryInfo"/>
 </qualifiedTypeNameHistroy>
